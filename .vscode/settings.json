@@ -1,0 +1,15 @@
+{
+  "eslint.run": "onType",
+  "prettier.enable": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true,
+  "eslint.options": {
+    "extensions": ["js", ".jsx", "ts", "tsx"]
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "prettier.endOfLine": "auto",
+}

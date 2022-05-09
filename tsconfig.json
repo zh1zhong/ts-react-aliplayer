@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "target": "ES2015",
+    "jsx": "react",
+    "lib": ["es6", "DOM"],
+    "declaration": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["utils/*"],
+      "@lib/*": ["lib/*"],
+      "@styles/*": ["styles/*"]
+    }
+  },
+  "include": ["src"],
+  // "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+    // "include": ["src", "components/Player.tsx", "src/components/player.index.tsx"],
+}

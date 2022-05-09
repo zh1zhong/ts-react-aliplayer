@@ -1,0 +1,50 @@
+{
+  "name": "ts-react-aliplayer",
+  "version": "1.0.1-7",
+  "description": "aliplayer",
+  "main": "dist/index.js",
+  "scripts": {
+    "postinstall": "node dist/lib/check.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-dev": "npm run clean & webpack --config webpack.dev.config.js",
+    "build": "npm run clean & webpack --config webpack.prod.config.js",
+    "clean": "rimraf dist"
+  },
+  "author": "zhizhong.zhuang",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/node": "^17.0.25",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "patch-package": "^6.4.7",
+    "postcss-loader": "^6.2.1",
+    "prettier": "^2.6.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
