@@ -1,12 +1,5 @@
 import React, { useEffect, memo } from 'react'
-
-import AliplayerClass from '../aliplayer'
-
-/*
-  待适配场景：
-  1. 一个页面创建多个播放器
-
-*/
+import AliplayerClass from './aliplayer'
 
 const defaultOptions = {
   // source: '',
@@ -42,15 +35,17 @@ interface PlayerProps {
 
 const Player: React.FC<PlayerProps> = (props) => {
   const { url, options = {}, events = {} } = props
-  // const [player, setPlayer] = useState(null)
   if (!url) return
+
   window.aliplayerObj = {}
+  let player = null
+
   const initPlayer = () => {
-    console.log('初始化播放器', window.Aliplayer)
+    // console.log('初始化播放器', window.Aliplayer)
     if (window.Aliplayer && !window.aliplayerObj.player) {
       // window.aliplayer.created = true
       window.aliplayerObj.player = new AliplayerClass()
-      window.aliplayerObj.player.init(
+      player = window.aliplayerObj.player.init(
         url,
         {
           ...defaultOptions,
@@ -58,6 +53,7 @@ const Player: React.FC<PlayerProps> = (props) => {
         },
         events
       )
+      console.log(player)
     }
   }
 
@@ -107,19 +103,19 @@ const Player: React.FC<PlayerProps> = (props) => {
         }
       })
     } else {
-      console.log('tagCreated')
+      // console.log('tagCreated')
       initPlayer() //这样是为了兼容页面上有多个播放器
     }
   }
 
   useEffect(() => {
     // TODO: 一个把console编程comment的工具，开发环境把comment变成console的工具
-    console.log('useEffect')
+    // console.log('useEffect')
     init()
     return () => {
-      console.log('播放器卸载')
-      window.aliplayerObj?.player?.dispose()
+      // console.log('播放器卸载')
       window.aliplayerObj = {}
+      if (player) player.dispose()
     }
   }, [])
 

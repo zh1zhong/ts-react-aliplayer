@@ -1,18 +1,228 @@
 
-.prism-player {
+#player-con.prism-player {
 
 
   .prism-big-play-btn {
-    width: 64px !important;
-    height: 64px !important;
+    width: 64px;
+    height: 64px;
   }
 
-  // .prism-fullscreen-btn {
-  //   // background: url('./icons/full-screen.png') no-repeat !important;
-  //   background: url('./icons/full-screen.svg') no-repeat !important;
-  //   // background: url('～@src/static/svgs/full-screen.svg') no-repeat;
-  //   // background: url('../static/svgs/full-screen.svg') no-repeat;
-  //   // path.join(__dirname, './dist')
-  // }
+  /********************************** 控制栏 **********************************/
+  .prism-controlbar,
+  .prism-controlbar-bg {
+    height: 50px;
+  }
+
+  /********************************** 进度条 **********************************/
+  .prism-liveshift-progress, .prism-progress {
+    bottom: 46px!important;
+  }
+
+  .prism-liveshift-progress .prism-progress-played,
+  .prism-progress .prism-progress-played {
+    background-color: #15B731;
+  }
+
+  /********************************** 播放时间 **********************************/
+  .prism-time-display {
+    font-size: 14px;
+  }
+
+  /********************************** 跳转上次播放时间按钮 **********************************/
+  .memory-play-wrap .memory-play .play-jump {
+    color: #15B731;
+  }
+
+  .iconfont.icon-close {
+    margin-right: 5px;
+    font-size: 13px;
+    &:hover {
+      color: #15B731;
+    }
+  }
+
+  /**********************************  全屏按钮  **********************************/
+  .prism-fullscreen-btn {
+    background: url('./icons/full-screen.svg') no-repeat !important;
+    background-size: 16px 16px !important;
+    background-position: 4px 4px !important;
+    position: relative;
+    background: none;
+    animation: none;
+    transition: all .2s;
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+
+  /********************************** 当前音量提示框 **********************************/
+  .prism-info-display {
+    border-radius: 2px;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 20px;
+    color: white;
+    bottom: 65px;
+    width: auto;
+    background: rgba(0, 0, 0, 0.5);
+    span {
+      color: white;
+    }
+  }
+
+  /**********************************  音量按钮  **********************************/
+  .prism-tooltip,
+  .prism-volume .volume-icon {
+    display: none !important;
+  }
+
+  .prism-volume {
+    width: 28px;
+    height: 30px;
+  }
+  .custom-volumeBtn {
+    position: absolute;
+    bottom: 6px;
+    color: #fff;
+    padding-top: 22px;
+    left: 2px;
+    width: 20px;
+    height: 70px;
+    line-height: 24px;
+    cursor: pointer;
+    background: url('./icons/volume.svg') no-repeat !important;
+    background-size: 22px !important;
+    background-position-y: bottom !important;
+    &.mute {
+      background: url('./icons/volume-mute.svg') no-repeat !important;
+      background-size: 22px !important;
+      background-position-y: bottom !important;
+    }
+    &.small {
+      background: url('./icons/volume-small.svg') no-repeat !important;
+      background-size: 22px !important;
+      background-position-x: -1px !important;
+      background-position-y: bottom !important;
+    }
+  }
+
+  // 音量展示
+  .prism-volume-control {
+    height: 165px;
+    width: 43px;
+    // display: block !important;
+    background: rgba(0, 0, 0, 0.81);
+    border-radius: 4px;
+    bottom: 55px;
+    transform: translateX(-10px);
+
+    .volume-text {
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: white;
+      margin-top: 5px;
+    }
+
+    // 音量轨道
+    .volume-range {
+      bottom: 13px;
+      left: 19px;
+      height: 115px;
+      width: 5px;
+      border-radius: 3.5px;
+      // 轨道填充
+      .volume-value {
+        background: #15B731;
+        border-radius: 3.5px;
+      }
+      // 音量原型按钮
+      .volume-cursor {
+        width: 13px;
+        height: 13px;
+        border-radius: 13px;
+        left: -4px;
+        transform: translateY(50%);
+        &:hover {
+          background: #15B731;
+        }
+      }
+    }
+  }
+
+  /********************************** 清晰度按钮 **********************************/
+  .quality-components {
+    height: 24px;
+    background: rgba(0,0,0, 0.81);
+    border-radius: 14px;
+    margin-top: 15px;
+    margin-right: 40px;
+    padding-bottom: 1px;
+    &:hover {
+      color: #ffffff;
+      background-color: #15B731;
+    }
+    .current-quality {
+      width: auto;
+      padding: 0 10px;
+    }
+  }
+
+  /**********************************  倍速按钮  **********************************/
+  .rate-components {
+    height: 24px;
+    border-radius: 14px;
+    margin-top: 15px;
+    margin-right: 40px;
+    background: rgba(0, 0, 0, 0.81);
+    &:hover {
+      color: #ffffff;
+      background-color: #15B731;
+    }
+    .current-rate {
+      display: none;
+    }
+    .custom-rateBtn {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      cursor: pointer;
+      padding-bottom: 1px;
+      border-radius: 14px;
+    }
+  }
+
+  /********************************** 清晰度，倍速列表样式 **********************************/
+  .rate-list,
+  .quality-list {
+    // display: block;
+    width: 100px;
+    height: auto;
+    padding-bottom: 20px;
+    border-radius: 2px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 24px;
+    overflow: hidden;
+    li {
+      width: 100%;
+      line-height: 33px;
+      border: 0;
+      background: rgba(0, 0, 0, 0.81);
+      &:last-child {
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      &:hover {
+        font-size: 18px;
+        transition: all .2s;
+      }
+      &.current {
+        color: #15B731;
+      }
+    }
+  }
 
 }

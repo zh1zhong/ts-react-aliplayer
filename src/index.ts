@@ -1,25 +1,28 @@
-import Player from './components/player'
+import Player from './player'
 import './player.less'
 
 declare global {
-  // type playerObj = object
-
   interface playObj {
     init: any
+    dispose: any
   }
 
   interface aliplayerObj {
     player: playObj
   }
 
-  interface Window {
-    aliplayerObj: aliplayerObj
-    AliPlayerComponent: object
+  interface AliPlayerComponentObj {
+    MemoryPlayComponent: object
+    RateComponent: object
+    QualityComponent: object
   }
 
-  // interface PlayerObject extends Object {
-  //   player: object
-  // }
+  interface Window {
+    aliplayerObj: aliplayerObj
+    AliPlayerComponent: AliPlayerComponentObj
+    // AliPlayerComponent: object
+    Aliplayer: (options: any, events: any) => any
+  }
 }
 
 export default Player

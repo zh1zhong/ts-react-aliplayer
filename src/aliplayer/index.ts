@@ -1,19 +1,46 @@
-import SetIcons from '../setIcons'
-
+import CustomVolume from '../components/volume'
+import CustomRate from '../components/rate'
 class AliPlayer {
   init = (url, options, events) => {
-    // const { videoWidth, videoHeight, autoplay = true,  } = options
+    const { showQuality = false, autoplay = true } = options
     const {
       ready = () => {},
       startPlay = () => {},
       pausePlay = () => {},
-      timeUpdate = () => {},
+      timeUpdate = null,
       ended = () => {},
       onError = () => {},
       onRequestFullscreen = () => {},
       onCancelFullscreen = () => {},
       getLastTime = () => {},
     } = events
+
+    const requireComponents = [
+      {
+        name: 'MemoryPlayComponent',
+        type: window.AliPlayerComponent.MemoryPlayComponent,
+        args: [false, getLastTime],
+      },
+      {
+        name: 'RateComponent',
+        type: window.AliPlayerComponent.RateComponent,
+      },
+      {
+        name: 'Volume',
+        type: CustomVolume,
+      },
+      {
+        name: 'Rate',
+        type: CustomRate,
+      },
+    ]
+
+    if (showQuality)
+      requireComponents.push({
+        name: 'QualityComponent',
+        type: window.AliPlayerComponent.QualityComponent,
+      })
+
     return window.Aliplayer(
       {
         id: 'player-con',
@@ -25,25 +52,7 @@ class AliPlayer {
         // videoWidth: `${videoWidth}px`,
         // videoHeight: `${videoHeight}px`,
         ...options,
-        components: [
-          {
-            name: 'MemoryPlayComponent',
-            type: window.AliPlayerComponent.MemoryPlayComponent,
-            args: [false, getLastTime],
-          },
-          {
-            name: 'RateComponent',
-            type: window.AliPlayerComponent.RateComponent,
-          },
-          {
-            name: 'QualityComponent',
-            type: window.AliPlayerComponent.QualityComponent,
-          },
-          {
-            name: 'SetIcons',
-            type: SetIcons,
-          },
-        ],
+        components: requireComponents,
         skinLayout: [
           { name: 'bigPlayButton', align: 'cc' },
           { name: 'H5Loading', align: 'cc' },
@@ -65,11 +74,14 @@ class AliPlayer {
         ],
       },
       (player) => {
-        player.on('ready', () => ready(player))
+        player.on('ready', () => {
+          ready(player)
+          if (autoplay) player.play()
+        })
         // player.on('waiting', () => ready(player))
         player.on('play', () => startPlay(player))
         player.on('pause', () => pausePlay(player))
-        player.on('timeUpdate', () => timeUpdate(player)) // 无效？
+        player.on('timeupdate', () => timeUpdate(player)) // 无效？
         player.on('ended', () => ended(player))
         player.on('error', () => onError(player))
         player.on('requestFullScreen', () => onRequestFullscreen(player))

@@ -11,5 +11,7 @@
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
-  "prettier.endOfLine": "auto",
+  "prettier.endOfLine": "lf",
+  "prettier.tabWidth": 4,
+  "prettier.configPath": ".prettierrc",
 }
