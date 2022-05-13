@@ -1,6 +1,6 @@
 {
   "name": "ts-react-aliplayer",
-  "version": "1.0.1-7",
+  "version": "1.0.2",
   "description": "aliplayer",
   "main": "dist/index.js",
   "scripts": {

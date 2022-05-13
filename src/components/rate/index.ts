@@ -33,20 +33,20 @@ export default class Rate {
   }
 
   createEl(el) {
-    console.log('createEl')
+    // console.log('createEl')
     this.setPlayRateBtn()
   }
 
   ready(player) {
-    console.log('ready')
+    // console.log('ready')
     this.player = player
   }
 
   play(player, e) {
-    console.log('play')
+    // console.log('play')
   }
 
   pause = (player, e) => {
-    console.log('pause')
+    // console.log('pause')
   }
 }

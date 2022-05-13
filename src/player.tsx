@@ -53,7 +53,6 @@ const Player: React.FC<PlayerProps> = (props) => {
         },
         events
       )
-      console.log(player)
     }
   }
 
@@ -96,9 +95,9 @@ const Player: React.FC<PlayerProps> = (props) => {
 
       //兼容单页加载和硬加载
       scriptTag.addEventListener('load', () => {
-        console.log('loaded')
+        // console.log('loaded')
         if (!window?.aliplayerObj?.player) {
-          console.log('loadedInit')
+          // console.log('loadedInit')
           initPlayer()
         }
       })
@@ -120,10 +119,9 @@ const Player: React.FC<PlayerProps> = (props) => {
   }, [])
 
   return (
-    <div>
-      <p>这是播放器的title</p>
+    <>
       <div id="player-con"></div>
-    </div>
+    </>
   )
 }
 

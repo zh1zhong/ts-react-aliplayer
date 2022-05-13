@@ -13,7 +13,7 @@ export default class Volume {
   }
 
   // 更新按钮图标
-  syncVolumeIcon = volumeNum => {
+  syncVolumeIcon = (volumeNum) => {
     const volumenBtn = document.getElementsByClassName('custom-volumeBtn')[0] // 自定义功能按钮
     if (volumeNum < 50 && volumeNum > 0) {
       volumenBtn.className = 'custom-volumeBtn small'
@@ -115,20 +115,20 @@ export default class Volume {
   }
 
   createEl(el) {
-    console.log('createEl')
+    // console.log('createEl')
     this.addVolumeBtn()
   }
 
   ready(player) {
-    console.log('ready')
+    // console.log('ready')
     this.player = player
   }
 
-  play(player,e) {
-    console.log('play')
+  play(player, e) {
+    // console.log('play')
   }
 
-  pause = (player,e) => {
-    console.log('pause')
+  pause = (player, e) => {
+    // console.log('pause')
   }
 }
