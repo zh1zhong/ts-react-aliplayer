@@ -1,7 +1,4 @@
-
 #player-con.prism-player {
-
-
   .prism-big-play-btn {
     width: 64px;
     height: 64px;
@@ -14,13 +11,14 @@
   }
 
   /********************************** 进度条 **********************************/
-  .prism-liveshift-progress, .prism-progress {
-    bottom: 46px!important;
+  .prism-liveshift-progress,
+  .prism-progress {
+    bottom: 46px !important;
   }
 
   .prism-liveshift-progress .prism-progress-played,
   .prism-progress .prism-progress-played {
-    background-color: #15B731;
+    background-color: #15b731;
   }
 
   /********************************** 播放时间 **********************************/
@@ -30,14 +28,14 @@
 
   /********************************** 跳转上次播放时间按钮 **********************************/
   .memory-play-wrap .memory-play .play-jump {
-    color: #15B731;
+    color: #15b731;
   }
 
   .iconfont.icon-close {
     margin-right: 5px;
     font-size: 13px;
     &:hover {
-      color: #15B731;
+      color: #15b731;
     }
   }
 
@@ -49,7 +47,7 @@
     position: relative;
     background: none;
     animation: none;
-    transition: all .2s;
+    transition: all 0.2s;
     &:hover {
       transform: scale(1.3);
     }
@@ -133,7 +131,7 @@
       border-radius: 3.5px;
       // 轨道填充
       .volume-value {
-        background: #15B731;
+        background: #15b731;
         border-radius: 3.5px;
       }
       // 音量原型按钮
@@ -144,7 +142,7 @@
         left: -4px;
         transform: translateY(50%);
         &:hover {
-          background: #15B731;
+          background: #15b731;
         }
       }
     }
@@ -153,19 +151,24 @@
   /********************************** 清晰度按钮 **********************************/
   .quality-components {
     height: 24px;
-    background: rgba(0,0,0, 0.81);
+    background: rgba(0, 0, 0, 0.81);
     border-radius: 14px;
     margin-top: 15px;
     margin-right: 40px;
     padding-bottom: 1px;
     &:hover {
       color: #ffffff;
-      background-color: #15B731;
+      background-color: #15b731;
     }
     .current-quality {
       width: auto;
       padding: 0 10px;
     }
+  }
+
+  .quality-modal {
+    bottom: 12%;
+    left: 2%;
   }
 
   /**********************************  倍速按钮  **********************************/
@@ -177,7 +180,7 @@
     background: rgba(0, 0, 0, 0.81);
     &:hover {
       color: #ffffff;
-      background-color: #15B731;
+      background-color: #15b731;
     }
     .current-rate {
       display: none;
@@ -217,12 +220,12 @@
       }
       &:hover {
         font-size: 18px;
-        transition: all .2s;
+        transition: all 0.2s;
       }
-      &.current {
-        color: #15B731;
+      &.current,
+      &.active {
+        color: #15b731;
       }
     }
   }
-
 }

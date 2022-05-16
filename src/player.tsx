@@ -19,12 +19,12 @@ const defaultOptions = {
   */
   controlBarVisibility: 'always',
   useH5Prism: true,
-  // HD(超清),SD(高清),LS(标清),FD(流畅),OD(原画)
-  definition: 'HD,SD,LD,FD',
-  // 清晰度排列顺序
+  // HD(超清),SD(高清),LD(标清),FD(流畅),OD(原画)
+  definition: 'FD,LD,SD,HD',
+  // 清晰度排列顺序, 只有使用Vid + PlayAuth播放方式时支持
   qualitySort: 'desc',
   // 默认清晰度
-  defaultDefinition: 'HD',
+  defaultDefinition: 'SD',
 }
 
 interface PlayerProps {
@@ -66,8 +66,11 @@ const Player: React.FC<PlayerProps> = (props) => {
     const head = document.getElementsByTagName('head')
     const html = document.getElementsByTagName('html')
     const linkIDTag = document.getElementById(linkID)
-    let scriptTag: any = document.getElementById(scriptID)
     let componentTag: any = document.getElementById(scriptID)
+    let componentTagLoaded: boolean = false
+    let scriptTag: any = document.getElementById(scriptID)
+    let scriptTagLoaded: boolean = false
+
     if (!linkIDTag) {
       // console.log('linkIDTag');
       const link = document.createElement('link')
@@ -84,6 +87,12 @@ const Player: React.FC<PlayerProps> = (props) => {
       componentTag.id = componentID
       componentTag.src = '/aliplayer/aliplayercomponents-1.0.8.min.js'
       html[0].appendChild(componentTag)
+      componentTag.addEventListener('load', () => {
+        componentTagLoaded = true
+        if (!window?.aliplayerObj?.player && componentTagLoaded && scriptTagLoaded) {
+          initPlayer()
+        }
+      })
     }
     if (!scriptTag) {
       scriptTag = document.createElement('script')
@@ -96,7 +105,7 @@ const Player: React.FC<PlayerProps> = (props) => {
       //兼容单页加载和硬加载
       scriptTag.addEventListener('load', () => {
         // console.log('loaded')
-        if (!window?.aliplayerObj?.player) {
+        if (!window?.aliplayerObj?.player && componentTagLoaded && scriptTagLoaded) {
           // console.log('loadedInit')
           initPlayer()
         }

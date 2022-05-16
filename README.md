@@ -12,6 +12,10 @@ yarn add ts-react-aliplayer
 
 添加声明文件
 
+##坑
+
+1. 使用 Quality 组件的时候需要加入回调 args，不然会报错
+
 ##
 
 js 与资源文件均为线上引用，暂不支持本地部署

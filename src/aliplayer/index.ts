@@ -1,5 +1,6 @@
 import CustomVolume from '../components/volume'
 import CustomRate from '../components/rate'
+import CustomQuality from '../components/quality'
 class AliPlayer {
   init = (url, options, events) => {
     const { showQuality = false, autoplay = true } = options
@@ -15,7 +16,7 @@ class AliPlayer {
       getLastTime = () => {},
     } = events
 
-    const requireComponents = [
+    let playerComponents = [
       {
         name: 'MemoryPlayComponent',
         type: window.AliPlayerComponent.MemoryPlayComponent,
@@ -36,10 +37,22 @@ class AliPlayer {
     ]
 
     if (showQuality)
-      requireComponents.push({
-        name: 'QualityComponent',
-        type: window.AliPlayerComponent.QualityComponent,
-      })
+      playerComponents = [
+        ...playerComponents,
+        {
+          name: 'QualityComponent',
+          type: window.AliPlayerComponent.QualityComponent,
+          args: [
+            function (definition, desc) {
+              console.log(definition + '-----' + desc)
+            },
+          ],
+        },
+        {
+          name: 'Quality',
+          type: CustomQuality,
+        },
+      ]
 
     return window.Aliplayer(
       {
@@ -52,7 +65,7 @@ class AliPlayer {
         // videoWidth: `${videoWidth}px`,
         // videoHeight: `${videoHeight}px`,
         ...options,
-        components: requireComponents,
+        components: playerComponents,
         skinLayout: [
           { name: 'bigPlayButton', align: 'cc' },
           { name: 'H5Loading', align: 'cc' },
@@ -86,7 +99,14 @@ class AliPlayer {
         player.on('error', () => onError(player))
         player.on('requestFullScreen', () => onRequestFullscreen(player))
         player.on('cancelFullScreen', () => onCancelFullscreen(player))
-        // player.on('sourceloaded', () => {})
+        player.on('sourceloaded', (params) => {
+          const {
+            definition,
+            paramData: { desc },
+          } = params
+          console.log(definition, desc)
+          player.getComponent('QualityComponent').setCurrentQuality(desc, definition)
+        })
       }
     )
   }
