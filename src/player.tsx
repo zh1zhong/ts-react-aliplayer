@@ -67,9 +67,9 @@ const Player: React.FC<PlayerProps> = (props) => {
     const html = document.getElementsByTagName('html')
     const linkIDTag = document.getElementById(linkID)
     let componentTag: any = document.getElementById(scriptID)
-    let componentTagLoaded: boolean = false
+    let componentTagLoaded = false
     let scriptTag: any = document.getElementById(scriptID)
-    let scriptTagLoaded: boolean = false
+    let scriptTagLoaded = false
 
     if (!linkIDTag) {
       // console.log('linkIDTag');
@@ -105,6 +105,7 @@ const Player: React.FC<PlayerProps> = (props) => {
       //兼容单页加载和硬加载
       scriptTag.addEventListener('load', () => {
         // console.log('loaded')
+        scriptTagLoaded = true
         if (!window?.aliplayerObj?.player && componentTagLoaded && scriptTagLoaded) {
           // console.log('loadedInit')
           initPlayer()
