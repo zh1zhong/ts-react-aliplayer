@@ -8,7 +8,7 @@ class AliPlayer {
       ready = () => {},
       startPlay = () => {},
       pausePlay = () => {},
-      timeUpdate = null,
+      timeUpdate = () => {},
       ended = () => {},
       onError = () => {},
       onRequestFullscreen = () => {},
@@ -89,12 +89,14 @@ class AliPlayer {
       (player) => {
         player.on('ready', () => {
           ready(player)
-          if (autoplay) player.play()
+          // if (autoplay) player.play()
         })
         // player.on('waiting', () => ready(player))
         player.on('play', () => startPlay(player))
         player.on('pause', () => pausePlay(player))
-        player.on('timeupdate', () => timeUpdate(player)) // 无效？
+        player.on('timeupdate', () => {
+          timeUpdate(player)
+        })
         player.on('ended', () => ended(player))
         player.on('error', () => onError(player))
         player.on('requestFullScreen', () => onRequestFullscreen(player))
@@ -104,7 +106,6 @@ class AliPlayer {
             definition,
             paramData: { desc },
           } = params
-          console.log(definition, desc)
           player.getComponent('QualityComponent').setCurrentQuality(desc, definition)
         })
       }

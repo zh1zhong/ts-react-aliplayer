@@ -5,7 +5,7 @@ const defaultOptions = {
   // source: '',
   width: '100%',
   height: '500px',
-  autoplay: true,
+  autoplay: false,
   isLive: false,
   rePlay: false,
   playesinline: true,
@@ -42,7 +42,7 @@ const Player: React.FC<PlayerProps> = (props) => {
 
   const initPlayer = () => {
     // console.log('初始化播放器', window.Aliplayer)
-    if (window.Aliplayer && !window.aliplayerObj.player) {
+    if (window.Aliplayer && window.AliPlayerComponent && !window.aliplayerObj.player) {
       // window.aliplayer.created = true
       window.aliplayerObj.player = new AliplayerClass()
       player = window.aliplayerObj.player.init(
