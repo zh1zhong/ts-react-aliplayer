@@ -30,7 +30,7 @@ export default class Quality {
       const qualityBtn = qualityComponents.getElementsByClassName('current-quality')[0]
       const qualityList = qualityComponents.getElementsByClassName('quality-list')[0]
       // eslint-disable-next-line no-underscore-dangle
-      const initQuality = player._urls[0].desc
+      const initQuality = player._urls.find(item => item.Url === player._options.source).desc
       // qualityList.getElementsByTagName('li')[0].className = 'active'
       qualityBtn.innerText = initQuality
     }
