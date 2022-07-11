@@ -1,5 +1,5 @@
 {
-  "name": "ts-react-aliplayer",
+  "name": "react-aliplayer",
   "version": "1.0.3-2",
   "description": "aliplayer",
   "main": "dist/index.js",
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "react": "17.x",
-    "react-dom": "17.x"
+    "react-dom": "17.x",
+    "rimraf": "^3.0.2"
   }
 }
