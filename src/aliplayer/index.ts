@@ -3,7 +3,7 @@ import CustomRate from '../components/rate'
 import CustomQuality from '../components/quality'
 class AliPlayer {
   init = (url, options, events) => {
-    const { showQuality = false, autoplay = true } = options
+    const { showQuality = false, autoplay = true, bulletScreenOptions = null } = options
     const {
       ready = () => {},
       startPlay = () => {},
@@ -54,6 +54,22 @@ class AliPlayer {
         },
       ]
 
+    if (bulletScreenOptions)
+      playerComponents = [
+        ...playerComponents,
+        {
+          name: 'BulletScreenComponent',
+          type: window.AliPlayerComponent.BulletScreenComponent,
+          /** Descriptions of the scrolling text component parameters: text, style, bulletPosition
+           * text: The scrolling text
+           * style: The style of the scrolling text
+           * bulletPosition: The position of the scrolling text. Valid values: 'top', 'bottom', and 'random'. The default is 'random'.
+           * 
+           * example: ['this is text', { color: 'red' }, 'top']
+           */
+          args: bulletScreenOptions,
+        },
+      ]
     return window.Aliplayer(
       {
         id: 'player-con',

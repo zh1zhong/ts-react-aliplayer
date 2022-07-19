@@ -15,6 +15,7 @@ declare global {
     MemoryPlayComponent: object
     RateComponent: object
     QualityComponent: object
+    BulletScreenComponent: object
   }
 
   interface Window {
