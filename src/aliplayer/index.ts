@@ -3,7 +3,7 @@ import CustomRate from '../components/rate'
 import CustomQuality from '../components/quality'
 class AliPlayer {
   init = (url, options, events) => {
-    const { showQuality = false, autoplay = true, bulletScreenOptions = null } = options
+    const { showQuality = false, bulletScreenOptions = null } = options
     const {
       ready = () => {},
       startPlay = () => {},

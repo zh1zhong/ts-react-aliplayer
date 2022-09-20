@@ -50,6 +50,19 @@ export default class Volume {
     }, 0)
   }
 
+  dblclickFun = () => {
+    const playBtn = document.getElementsByClassName('prism-big-play-btn')[0];
+    if (!this.player) return;
+    const playerStatus = this.player.getStatus()
+    const canPlayStatus = ['ready', 'pause', 'ended']
+    if (canPlayStatus.includes(playerStatus)) {
+      this.player.play();
+    } else {
+      this.player.pause();
+      playBtn.style.display = 'block';
+    }
+  }
+
   // 添加音量按钮
   addVolumeBtn = () => {
     const controlBar = document.getElementsByClassName('prism-controlbar')[0]
@@ -114,9 +127,93 @@ export default class Volume {
     }
   }
 
+  // 绑定播放区域的鼠标事件
+  bindPlayerEvent = () => {
+    const playerArea = document.getElementById('player-con');
+    const videoArea = document.getElementsByTagName('video')[0];
+    const controlBar = document.getElementsByClassName('prism-controlbar')[0];
+    const playBtn = document.getElementsByClassName('prism-big-play-btn')[0];
+    const animationArea = document.getElementsByClassName('prism-animation')[0];
+    const memoryArea = document.getElementsByClassName('memory-play-wrap')[0];
+    // 绑定视频的双击事件
+    videoArea.ondblclick = () => {
+      this.dblclickFun();
+    }
+    playerArea.ondblclick = () => {
+      this.dblclickFun();
+    }
+
+    // 当鼠标滑过不同控件时，保持控制条的显示
+    animationArea.onmouseover = () => { this.controlOnShow = true; }
+    playBtn.onmouseover = () => { this.controlOnShow = true; }
+    memoryArea.onmouseover = () => { this.controlOnShow = true; }
+    const initClassName = videoArea.className;
+    let pointerStopTimer = null;
+    const ceateTimer = () => {
+      // 此处一定要先清除后return
+      if (pointerStopTimer) clearTimeout(pointerStopTimer);
+      if (this.controlOnHover) return
+      pointerStopTimer = setTimeout(() => {
+        videoArea.className = `${initClassName} hideCursor`;
+        controlBar.className = 'prism-controlbar';
+      }, 3000) // 鼠标在视频区域中停留3S后，鼠标和操作栏消失
+    }
+    // 视频标签区域
+    playerArea.onmouseover = () => {
+      this.controlOnShow = true;
+      controlBar.className = 'prism-controlbar show-prism-controlbar';
+      ceateTimer();
+      playerArea.onmousemove = () => {
+        videoArea.className = initClassName;
+        controlBar.className = 'prism-controlbar show-prism-controlbar';
+        ceateTimer();
+      }
+    }
+    playerArea.onmouseleave = () => {
+      this.controlOnShow = false;
+      playerArea.onmousemove = null;
+      if (pointerStopTimer) clearTimeout(pointerStopTimer);
+      setTimeout(() => {
+        if (!this.controlOnShow) controlBar.className = 'prism-controlbar';
+      }, 0);
+    }
+    videoArea.onmouseover = () => {
+      this.controlOnShow = true;
+      controlBar.className = 'prism-controlbar show-prism-controlbar';
+      ceateTimer();
+      videoArea.onmousemove = () => {
+        videoArea.className = initClassName;
+        controlBar.className = 'prism-controlbar show-prism-controlbar';
+        ceateTimer();
+      }
+    }
+    videoArea.onmouseleave = () => {
+      this.controlOnShow = false;
+      videoArea.onmousemove = null;
+      if (pointerStopTimer) clearTimeout(pointerStopTimer);
+      setTimeout(() => {
+        if (!this.controlOnShow) controlBar.className = 'prism-controlbar';
+      }, 0);
+    }
+    // 控制条区域
+    controlBar.onmouseover = () => {
+      this.controlOnShow = true;
+      this.controlOnHover = true;
+      controlBar.className = 'prism-controlbar show-prism-controlbar';
+    }
+    controlBar.onmouseleave = () => {
+      this.controlOnShow = false;
+      this.controlOnHover = false;
+      setTimeout(() => {
+        if (!this.controlOnShow) controlBar.className = 'prism-controlbar';
+      }, 0);
+    }
+  }
+
   createEl(el) {
     // console.log('createEl')
     this.addVolumeBtn()
+    this.bindPlayerEvent();
   }
 
   ready(player) {

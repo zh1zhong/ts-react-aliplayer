@@ -5,7 +5,7 @@ const defaultOptions = {
   // source: '',
   width: '100%',
   height: '500px',
-  autoplay: false,
+  autoplay: true,
   isLive: false,
   rePlay: false,
   playesinline: true,
