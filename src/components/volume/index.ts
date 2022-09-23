@@ -56,6 +56,9 @@ export default class Volume {
     const playerStatus = this.player.getStatus()
     const canPlayStatus = ['ready', 'pause', 'ended']
     if (canPlayStatus.includes(playerStatus)) {
+      if (this.player.getStatus() === 'ended') {
+        this.player.seek(0);
+      }
       this.player.play();
     } else {
       this.player.pause();
